@@ -1,0 +1,823 @@
+{
+	"info": {
+		"_postman_id": "0c97dfbf-c375-4a02-b95d-18a29dcb99ec",
+		"name": "SwaggerUI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15627998"
+	},
+	"item": [
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "SignUp",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"pm.test(\"Status code name has string\", function () {\r",
+									"    pm.response.to.have.status(\"Conflict\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"Youssef Abdellah Mohamed Khalil\",\r\n  \"email\": \"YoussefAbdellah@gmail.com\",\r\n  \"password\": \"abc123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/Account/register",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"Account",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"var token = jsonData.token\r",
+									"pm.environment.set(\"token\", token)\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"Youssef Abdellah Mohamed Khalil\",\r\n  \"password\": \"abc123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/Account/login",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"Account",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Service",
+			"item": [
+				{
+					"name": "AddService",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n  \"company_id\": 2,\r\n  \"name\": \"Testing\",\r\n  \"defaultDuration\": \"00:00:00\",\r\n  \"price\": 1000\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/Service/add",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"Service",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Service",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/Service/get?companyId=2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"Service",
+								"get"
+							],
+							"query": [
+								{
+									"key": "companyId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Service",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"STA2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/Service/get?companyId=2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"Service",
+								"get"
+							],
+							"query": [
+								{
+									"key": "companyId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Service",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/Service/delete?companyId=1&ServiceName=Testing",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"Service",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "companyId",
+									"value": "1"
+								},
+								{
+									"key": "ServiceName",
+									"value": "Testing"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete All Service",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "/api/Service/deleteAll?companyId=0",
+							"path": [
+								"api",
+								"Service",
+								"deleteAll"
+							],
+							"query": [
+								{
+									"key": "companyId",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Resource",
+			"item": [
+				{
+					"name": "AddResource",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Youssef\",\r\n  \"company_id\": 2,\r\n  \"servicesNames\": [\r\n    \"Testing\"\r\n  ],\r\n  \"duration\": \"00:00:00\",\r\n  \"workingDays\": [\r\n    1,\r\n    2,\r\n    3\r\n    \r\n    \r\n  ],\r\n  \"workingStartTime\": \"02:00:00\",\r\n  \"workingEndTime\": \"06:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/Resource/add",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"Resource",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetResources",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/Resource/get?company_Id=3",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"Resource",
+								"get"
+							],
+							"query": [
+								{
+									"key": "company_Id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Resource",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Ahmed\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/Resource/get?companyId=0",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"Resource",
+								"get"
+							],
+							"query": [
+								{
+									"key": "companyId",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Resources",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/Resource/delete?companyId=0&resourceName=Youssef",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"Resource",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "companyId",
+									"value": "0"
+								},
+								{
+									"key": "resourceName",
+									"value": "Youssef"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete All Resource",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/Resource/deleteAll?companyId=0",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"Resource",
+								"deleteAll"
+							],
+							"query": [
+								{
+									"key": "companyId",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Appointment Contact",
+			"item": [
+				{
+					"name": "available Slots",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/Appointment/availableSlots?resourceName=Youssef&serviceName=Testing&date=2023-10-14T02:00:00",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"Appointment",
+								"availableSlots"
+							],
+							"query": [
+								{
+									"key": "resourceName",
+									"value": "Youssef"
+								},
+								{
+									"key": "serviceName",
+									"value": "Testing"
+								},
+								{
+									"key": "date",
+									"value": "2023-10-14T02:00:00"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "book",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/Appointment/book?resourceName=Youssef&serviceName=Testing&startTime=2023-10-14T02:00:00",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"Appointment",
+								"book"
+							],
+							"query": [
+								{
+									"key": "resourceName",
+									"value": "Youssef"
+								},
+								{
+									"key": "serviceName",
+									"value": "Testing"
+								},
+								{
+									"key": "startTime",
+									"value": "2023-10-14T02:00:00"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "booked",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/Appointment/bookedAppointements?resourceName=Youssef&serviceName=Testing",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"Appointment",
+								"bookedAppointements"
+							],
+							"query": [
+								{
+									"key": "resourceName",
+									"value": "Youssef"
+								},
+								{
+									"key": "serviceName",
+									"value": "Testing"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Appointment Employee",
+			"item": [
+				{
+					"name": "blocktime",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/Appointment/blocktime?resourceName=Youssef&startDate=2023-10-14T07:00:00&endDate=09:00:00",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"Appointment",
+								"blocktime"
+							],
+							"query": [
+								{
+									"key": "resourceName",
+									"value": "Youssef"
+								},
+								{
+									"key": "startDate",
+									"value": "2023-10-14T07:00:00"
+								},
+								{
+									"key": "endDate",
+									"value": "09:00:00"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BlockTime",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/Appointment/blocktime?resourceName=Youssef",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"Appointment",
+								"blocktime"
+							],
+							"query": [
+								{
+									"key": "resourceName",
+									"value": "Youssef"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Home",
+			"item": [
+				{
+					"name": "TestApp",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/Home/TESTAPP?key=0",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"Home",
+								"TESTAPP"
+							],
+							"query": [
+								{
+									"key": "key",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "company_id",
+			"value": ""
+		}
+	]
+}
